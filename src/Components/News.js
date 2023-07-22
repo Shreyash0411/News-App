@@ -37,7 +37,7 @@ export class News extends Component {
 
   async update(){
 
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b1b37686cd834209b21cd0dcc507bbd0&page=${this.props.page}&pageSize=${this.props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=a71d4072cd6a4ecb9ad6423e4ffc1580&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({
       loading: true
     });
@@ -50,13 +50,13 @@ export class News extends Component {
       loading: false
     })
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    
   }
 
   
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b1b37686cd834209b21cd0dcc507bbd0&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=a71d4072cd6a4ecb9ad6423e4ffc1580&page=1&pageSize=${this.props.pageSize}`;
     this.setState({
       loading: true
     });
@@ -68,13 +68,11 @@ export class News extends Component {
       totalResults: parsedData.totalResults,
       loading: false
     })
-
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 
 
   handleNext = async () => {
-    this.setState({
+    await this.setState({
       page : this.state.page +1
     })
 
@@ -83,7 +81,7 @@ export class News extends Component {
   }
 
   handlePrevious = async () => {
-      this.setState({
+    await  this.setState({
       page : this.state.page -1
     })
 
@@ -100,7 +98,7 @@ export class News extends Component {
         <div className='row'>
           {!this.state.loading && this.state.articles.map((Element) => {
             return <div className='col-md-4' key={Element.url}>
-              <Newsitem title={Element.title ? Element.title : " "} description={Element.description ? Element.description : " "}
+              <Newsitem title={Element.title ? Element.title : ""} description={Element.description ? Element.description : ""}
                 imageUrl={Element.urlToImage ? Element.urlToImage : "https://media.9news.com/assets/KUSA/images/a060fe50-b5c2-4b50-92ed-1b6e23e19e5e/a060fe50-b5c2-4b50-92ed-1b6e23e19e5e_1140x641.jpg"}
                 newsUrl={Element.url} author={Element.author ? Element.author : "Unknown"} dates={Element.publishedAt} source = {Element.source.name} />
             </div>

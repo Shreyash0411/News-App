@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import loading from './loading.gif'
 
-export class Spinner extends Component {
-  render() {
+export default function Spinner() {
     return (
       <div>
         <center>
@@ -10,7 +9,5 @@ export class Spinner extends Component {
         </center>
       </div>
     )
-  }
 }
 
-export default Spinner
